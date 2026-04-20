@@ -341,6 +341,14 @@ function toggleWishlist(id) {
     showToast("❤️ Added to wishlist");
   }
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  updateWishlistCount();
+}
+
+function updateWishlistCount() {
+  const count = getWishlist().length;
+  document.querySelectorAll(".wishlist-count").forEach(el => {
+    el.textContent = count;
+  });
 }
 
 // Attach wishlist listeners (called after rendering products)
@@ -468,4 +476,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   attachWishlistListeners();
   attachQuickViewListeners();
+  updateCartCount();
+  updateWishlistCount();
 });

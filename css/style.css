@@ -637,7 +637,10 @@ button {
 /* ========== MODAL ========== */
 .modal {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
@@ -1234,4 +1237,24 @@ button {
 
 .pulse {
   animation: pulse 0.4s ease;
+}
+
+/* Wishlist count badge */
+.wishlist-count {
+  background: #e53e3e;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  border-radius: 50%;
+  margin-left: 4px;
+}
+
+/* Focus styles for keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
