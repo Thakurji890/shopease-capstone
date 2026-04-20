@@ -6,6 +6,7 @@ A responsive e-commerce web application built as the **Final Capstone Project (T
 🟢 Day 1 — Planning & Setup Complete ✅
 🟢 Day 2 — Design Complete ✅
 🟢 Day 3 — Core Features and styling complete ✅
+🟢 Day 4 — Cart Page and all functionality complete ✅
 
 ## 🛠️ Tech Stack
 - HTML5

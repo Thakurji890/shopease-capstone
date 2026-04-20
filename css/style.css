@@ -976,3 +976,9 @@ button {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-dark);
 }
+
+
+/* Ensure hidden attribute works */
+[hidden] {
+  display: none !important;
+}
