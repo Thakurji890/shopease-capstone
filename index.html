@@ -6,53 +6,19 @@
   <meta name="description" content="ShopEase - Your one-stop shop for amazing products online.">
   <meta name="keywords" content="ecommerce, shop, online store, shopease">
   <meta name="author" content="Manesh Thakur">
-
-   <!-- Open Graph for social sharing -->
   <meta property="og:title" content="ShopEase - Shop Smart, Shop Easy">
   <meta property="og:description" content="Discover amazing products at unbeatable prices.">
   <meta property="og:type" content="website">
-
   <title>ShopEase | Home</title>
-
-  <!-- Favicon -->
-   <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- ============== LOADING SPINNER ============== -->
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-  </div>
 
-  <!-- ============== BACK TO TOP BUTTON ============== -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    ↑
-  </button>
-  
-<header class="header">
-    <div class="container nav-container">
-      <a href="index.html" class="logo" aria-label="ShopEase Home">
-        🛒 <span>ShopEase</span>
-      </a>
-
-      <nav class="navbar" aria-label="Main Navigation">
-        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-          ☰
-        </button>
-        <ul class="nav-links">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart <span class="cart-count">0</span></a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li>
-            <button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <!-- Shared header/footer injected by components.js (data-page sets the active nav link) -->
+  <script src="js/components.js" data-page="home"></script>
 
   <!-- ================= MAIN CONTENT ================= -->
   <main>
@@ -79,7 +45,7 @@
           <article class="feature-card">
             <div class="feature-icon">🔒</div>
             <h3>Secure Payment</h3>
-            <p>100% safe & secure transactions</p>
+            <p>100% safe &amp; secure transactions</p>
           </article>
           <article class="feature-card">
             <div class="feature-icon">↩️</div>
@@ -101,23 +67,14 @@
         <div class="about-wrapper">
           <div class="about-content">
             <h2 class="section-title">About ShopEase</h2>
-            <p>Welcome to <strong>ShopEase</strong> — your trusted online shopping destination! 
-            We believe shopping should be <strong>simple, fast, and enjoyable</strong>. 
-            Our mission is to bring you the best products at unbeatable prices, with 
+            <p>Welcome to <strong>ShopEase</strong> — your trusted online shopping destination!
+            We believe shopping should be <strong>simple, fast, and enjoyable</strong>.
+            Our mission is to bring you the best products at unbeatable prices, with
             excellent customer service every step of the way.</p>
             <div class="stats">
-              <div class="stat-item">
-                <h3>10K+</h3>
-                <p>Happy Customers</p>
-              </div>
-              <div class="stat-item">
-                <h3>500+</h3>
-                <p>Products</p>
-              </div>
-              <div class="stat-item">
-                <h3>24/7</h3>
-                <p>Support</p>
-              </div>
+              <div class="stat-item"><h3>10K+</h3><p>Happy Customers</p></div>
+              <div class="stat-item"><h3>500+</h3><p>Products</p></div>
+              <div class="stat-item"><h3>24/7</h3><p>Support</p></div>
             </div>
           </div>
         </div>
@@ -129,7 +86,7 @@
       <div class="container">
         <h2 id="featured-title" class="section-title">⭐ Featured Products</h2>
         <div class="products-grid" id="featuredProducts">
-          <!-- Products will be injected via JavaScript -->
+          <!-- Products injected via JavaScript -->
         </div>
         <div class="text-center">
           <a href="products.html" class="btn btn-outline">View All Products</a>
@@ -141,7 +98,7 @@
     <section class="newsletter" aria-labelledby="newsletter-title">
       <div class="container">
         <h2 id="newsletter-title">📧 Stay Updated</h2>
-        <p>Subscribe to our newsletter for exclusive deals & offers</p>
+        <p>Subscribe to our newsletter for exclusive deals &amp; offers</p>
         <form class="newsletter-form" id="newsletterForm">
           <input type="email" placeholder="Enter your email" required aria-label="Email address">
           <button type="submit" class="btn btn-primary">Subscribe</button>
@@ -151,44 +108,11 @@
 
   </main>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-col">
-        <h3>🛒 ShopEase</h3>
-        <p>Your trusted online shopping partner since 2026.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow Us</h4>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="Twitter">🐦</a>
-          <a href="#" aria-label="Instagram">📸</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 ShopEase by Manesh Thakur. All rights reserved. Built with 💚 during ApexPlanet Internship.</p>
-    </div>
-  </footer>
-  
-  <!-- ============== PRODUCT DETAIL MODAL ============== -->
+  <!-- Product Detail Modal -->
   <div class="modal product-modal" id="productModal" hidden>
     <div class="modal-content product-modal-content">
       <button class="modal-close" aria-label="Close modal">✕</button>
-      <div class="product-modal-body" id="productModalBody">
-        <!-- Injected by JS -->
-      </div>
+      <div class="product-modal-body" id="productModalBody"></div>
     </div>
   </div>
 

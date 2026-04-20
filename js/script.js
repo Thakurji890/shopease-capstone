@@ -57,9 +57,10 @@ if (menuToggle && navLinks) {
 /* ============================================================
    3. CART MANAGEMENT (LocalStorage)
 ============================================================ */
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart")) || [];
-}
+// Unified localStorage helper
+const getStorage = key => JSON.parse(localStorage.getItem(key)) || [];
+const getCart     = () => getStorage("cart");
+const getWishlist = () => getStorage("wishlist");
 
 function saveCart(cart) {
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -98,31 +99,12 @@ function showToast(message) {
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast";
-    toast.style.cssText = `
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #2c7a7b;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 9999;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-      font-weight: 500;
-    `;
+    toast.className = "toast";
     document.body.appendChild(toast);
   }
   toast.textContent = message;
-  toast.style.opacity = "1";
-  toast.style.transform = "translateY(0)";
-
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(20px)";
-  }, 2500);
+  toast.classList.add("toast--visible");
+  setTimeout(() => toast.classList.remove("toast--visible"), 2500);
 }
 
 /* ============================================================
@@ -220,16 +202,8 @@ if (productsGrid) {
 }
 
 /* ============================================================
-   8. ATTACH ADD-TO-CART LISTENERS
+   8. ATTACH ADD-TO-CART LISTENERS  (defined fully in section 17)
 ============================================================ */
-function attachAddToCartListeners() {
-  document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      const id = parseInt(e.target.dataset.id);
-      addToCart(id);
-    });
-  });
-}
 
 /* ============================================================
    9. CONTACT FORM VALIDATION
@@ -283,11 +257,8 @@ if (newsletterForm) {
 }
 
 /* ============================================================
-   11. INITIALIZE ON LOAD
+   11. INITIALIZE ON LOAD  (merged into section 18 below)
 ============================================================ */
-document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-});
 
 /* ============================================================
    12. LOADING SPINNER
@@ -308,11 +279,7 @@ const backToTop = document.getElementById("backToTop");
 
 if (backToTop) {
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      backToTop.classList.add("show");
-    } else {
-      backToTop.classList.remove("show");
-    }
+    backToTop.classList.toggle("show", window.scrollY > 300);
   });
 
   backToTop.addEventListener("click", () => {
@@ -323,10 +290,6 @@ if (backToTop) {
 /* ============================================================
    14. WISHLIST FEATURE
 ============================================================ */
-function getWishlist() {
-  return JSON.parse(localStorage.getItem("wishlist")) || [];
-}
-
 function isInWishlist(id) {
   return getWishlist().includes(id);
 }
@@ -470,12 +433,12 @@ function attachAddToCartListeners() {
 }
 
 /* ============================================================
-   18. INITIALIZE ADVANCED FEATURES
+   18. INITIALIZE ALL FEATURES (single DOMContentLoaded)
 ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  updateWishlistCount();
   initScrollReveal();
   attachWishlistListeners();
   attachQuickViewListeners();
-  updateCartCount();
-  updateWishlistCount();
 });

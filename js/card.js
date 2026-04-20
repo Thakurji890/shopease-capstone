@@ -16,7 +16,7 @@ const modalClose = document.querySelector(".modal-close");
    RENDER CART ITEMS
 ============================================================ */
 function renderCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cart = getCart();
 
   if (!cartItemsEl) return;
 
@@ -84,7 +84,7 @@ function attachCartListeners() {
 }
 
 function updateQuantity(id, change) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = getCart();
   const item = cart.find(i => i.id === id);
   if (!item) return;
 
@@ -99,7 +99,7 @@ function updateQuantity(id, change) {
 }
 
 function removeFromCart(id) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let cart = getCart();
   cart = cart.filter(i => i.id !== id);
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart();

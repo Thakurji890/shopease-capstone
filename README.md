@@ -128,7 +128,8 @@ shop ease-capstone/
 │   └── style.css        # Stylesheet
 ├── js/
 │   ├── main.js          # Main application logic
-│   └── products.js      # Product data
+│   ├── products.js      # Product data
+│   └── components.js    # Header and Footer
 ├── index.html           # Home page
 ├── products.html        # Products listing
 ├── cart.html            # Shopping cart
@@ -141,5 +142,3 @@ shop ease-capstone/
 ### ⭐ If you found this project helpful, please give it a star! ⭐
 
 --- 
-
-More updates coming soon! 🚀

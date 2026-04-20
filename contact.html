@@ -5,44 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Contact ShopEase - We'd love to hear from you!">
   <title>ShopEase | Contact</title>
-
   <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- ============== LOADING SPINNER ============== -->
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-  </div>
 
-  <!-- ============== BACK TO TOP BUTTON ============== -->
-  <button class="back-to-top" id="backToTop" aria-label="Back to top">
-    ↑
-  </button>
+  <script src="js/components.js" data-page="contact"></script>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="container nav-container">
-      <a href="index.html" class="logo" aria-label="ShopEase Home">
-        🛒 <span>ShopEase</span>
-      </a>
-      <nav class="navbar" aria-label="Main Navigation">
-        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">☰</button>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart <span class="cart-count">0</span></a></li>
-          <li><a href="products.html" title="Wishlist">❤️ <span class="wishlist-count">0</span></a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
-          <li><button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ================= MAIN ================= -->
   <main>
 
     <section class="page-header">
@@ -56,35 +27,23 @@
       <div class="container">
         <div class="contact-wrapper">
 
-          <!-- Contact Info -->
           <aside class="contact-info" aria-label="Contact Information">
             <h2>Get in Touch</h2>
             <p>Have questions? We're here to help 24/7.</p>
-            
             <div class="info-item">
               <span class="info-icon">📍</span>
-              <div>
-                <h4>Address</h4>
-                <p>123 Shop Street, Digital City, 45678</p>
-              </div>
+              <div><h4>Address</h4><p>123 Shop Street, Digital City, 45678</p></div>
             </div>
             <div class="info-item">
               <span class="info-icon">📧</span>
-              <div>
-                <h4>Email</h4>
-                <p>support@shopease.com</p>
-              </div>
+              <div><h4>Email</h4><p>support@shopease.com</p></div>
             </div>
             <div class="info-item">
               <span class="info-icon">📱</span>
-              <div>
-                <h4>Phone</h4>
-                <p>+1 (555) 123-4567</p>
-              </div>
+              <div><h4>Phone</h4><p>+1 (555) 123-4567</p></div>
             </div>
           </aside>
 
-          <!-- Contact Form -->
           <div class="contact-form-wrapper">
             <h2>Send us a Message</h2>
             <form id="contactForm" class="contact-form" novalidate>
@@ -93,28 +52,23 @@
                 <input type="text" id="name" name="name" required>
                 <small class="error-msg"></small>
               </div>
-
               <div class="form-group">
                 <label for="contactEmail">Email *</label>
                 <input type="email" id="contactEmail" name="email" required>
                 <small class="error-msg"></small>
               </div>
-
               <div class="form-group">
                 <label for="subject">Subject *</label>
                 <input type="text" id="subject" name="subject" required>
                 <small class="error-msg"></small>
               </div>
-
               <div class="form-group">
                 <label for="message">Message *</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
                 <small class="error-msg"></small>
               </div>
-
               <button type="submit" class="btn btn-primary btn-block">Send Message ✈️</button>
             </form>
-
             <p id="successMsg" class="success-msg" hidden>✅ Message sent successfully!</p>
           </div>
 
@@ -123,37 +77,6 @@
     </section>
 
   </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-col">
-        <h3>🛒 ShopEase</h3>
-        <p>Your trusted online shopping partner since 2026.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow Us</h4>
-        <div class="social-links">
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="Twitter">🐦</a>
-          <a href="#" aria-label="Instagram">📸</a>
-          <a href="#" aria-label="LinkedIn">💼</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 ShopEase. All rights reserved.</p>
-    </div>
-  </footer>
 
   <script src="js/script.js"></script>
 </body>
