@@ -12,6 +12,15 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+  <!-- ============== LOADING SPINNER ============== -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- ============== BACK TO TOP BUTTON ============== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    ↑
+  </button>
 
   <!-- ================= HEADER ================= -->
   <header class="header">
@@ -117,6 +126,16 @@
       <p>© 2024 ShopEase. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- ============== PRODUCT DETAIL MODAL ============== -->
+  <div class="modal product-modal" id="productModal" hidden>
+    <div class="modal-content product-modal-content">
+      <button class="modal-close" aria-label="Close modal">✕</button>
+      <div class="product-modal-body" id="productModalBody">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
 
   <script src="js/products.js"></script>
   <script src="js/script.js"></script>

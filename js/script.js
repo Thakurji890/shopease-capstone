@@ -130,8 +130,15 @@ function showToast(message) {
 ============================================================ */
 function createProductCard(product) {
   return `
-    <article class="product-card fade-in">
-      <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+    <article class="product-card fade-in" data-id="${product.id}">
+      <div class="product-image-wrapper">
+        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+        <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+        <button class="wishlist-btn" data-id="${product.id}" aria-label="Add to wishlist">
+          ${isInWishlist(product.id) ? "❤️" : "🤍"}
+        </button>
+        <button class="quick-view-btn" data-id="${product.id}">👁️ Quick View</button>
+      </div>
       <div class="product-info">
         <span class="product-category">${product.category}</span>
         <h3 class="product-name">${product.name}</h3>
@@ -280,4 +287,185 @@ if (newsletterForm) {
 ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
+});
+
+/* ============================================================
+   12. LOADING SPINNER
+============================================================ */
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) {
+    setTimeout(() => {
+      loader.classList.add("hidden");
+    }, 600);
+  }
+});
+
+/* ============================================================
+   13. BACK TO TOP BUTTON
+============================================================ */
+const backToTop = document.getElementById("backToTop");
+
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.add("show");
+    } else {
+      backToTop.classList.remove("show");
+    }
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+/* ============================================================
+   14. WISHLIST FEATURE
+============================================================ */
+function getWishlist() {
+  return JSON.parse(localStorage.getItem("wishlist")) || [];
+}
+
+function isInWishlist(id) {
+  return getWishlist().includes(id);
+}
+
+function toggleWishlist(id) {
+  let wishlist = getWishlist();
+  if (wishlist.includes(id)) {
+    wishlist = wishlist.filter(i => i !== id);
+    showToast("💔 Removed from wishlist");
+  } else {
+    wishlist.push(id);
+    showToast("❤️ Added to wishlist");
+  }
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
+
+// Attach wishlist listeners (called after rendering products)
+function attachWishlistListeners() {
+  document.querySelectorAll(".wishlist-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      toggleWishlist(id);
+      btn.textContent = isInWishlist(id) ? "❤️" : "🤍";
+      btn.classList.add("pulse");
+      setTimeout(() => btn.classList.remove("pulse"), 400);
+    });
+  });
+}
+
+/* ============================================================
+   15. PRODUCT QUICK VIEW MODAL
+============================================================ */
+const productModal = document.getElementById("productModal");
+const productModalBody = document.getElementById("productModalBody");
+
+function openProductModal(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product || !productModal) return;
+
+  const stars = "★".repeat(Math.floor(product.rating)) + "☆".repeat(5 - Math.floor(product.rating));
+
+  productModalBody.innerHTML = `
+    <img src="${product.image}" alt="${product.name}">
+    <div class="product-modal-info">
+      <span class="product-category">${product.category}</span>
+      <h2>${product.name}</h2>
+      <div class="rating">${stars} <span style="color: var(--text-light); font-size: 0.9rem;">(${product.rating})</span></div>
+      <p class="price">$${product.price.toFixed(2)}</p>
+      <p class="description">${product.description}</p>
+      <button class="btn btn-primary btn-block add-to-cart-btn" data-id="${product.id}">
+        Add to Cart 🛒
+      </button>
+    </div>
+  `;
+
+  productModal.hidden = false;
+
+  // Attach add-to-cart on modal button
+  productModalBody.querySelector(".add-to-cart-btn").addEventListener("click", e => {
+    addToCart(parseInt(e.target.dataset.id));
+    productModal.hidden = true;
+  });
+}
+
+function attachQuickViewListeners() {
+  document.querySelectorAll(".quick-view-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      openProductModal(id);
+    });
+  });
+}
+
+// Close product modal
+if (productModal) {
+  const closeBtn = productModal.querySelector(".modal-close");
+  closeBtn?.addEventListener("click", () => productModal.hidden = true);
+
+  productModal.addEventListener("click", e => {
+    if (e.target === productModal) productModal.hidden = true;
+  });
+}
+
+// ESC key closes modal
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    if (productModal) productModal.hidden = true;
+    const checkoutModal = document.getElementById("checkoutModal");
+    if (checkoutModal) checkoutModal.hidden = true;
+  }
+});
+
+/* ============================================================
+   16. SCROLL REVEAL ANIMATION
+============================================================ */
+function initScrollReveal() {
+  const reveals = document.querySelectorAll(".reveal, .feature-card, .product-card");
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => {
+    el.classList.add("reveal");
+    observer.observe(el);
+  });
+}
+
+/* ============================================================
+   17. UPDATE attachAddToCartListeners to include new features
+============================================================ */
+// Override the original function
+function attachAddToCartListeners() {
+  document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      const id = parseInt(e.target.dataset.id);
+      addToCart(id);
+      e.target.classList.add("pulse");
+      setTimeout(() => e.target.classList.remove("pulse"), 400);
+    });
+  });
+
+  // Also attach wishlist and quick view
+  attachWishlistListeners();
+  attachQuickViewListeners();
+}
+
+/* ============================================================
+   18. INITIALIZE ADVANCED FEATURES
+============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  initScrollReveal();
+  attachWishlistListeners();
+  attachQuickViewListeners();
 });

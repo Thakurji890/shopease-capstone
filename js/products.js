@@ -1,5 +1,5 @@
 // ==========================================================
-// SHOPEASE - PRODUCT DATA
+// SHOPEASE - PRODUCT DATA (Enhanced)
 // ==========================================================
 
 const products = [
@@ -9,7 +9,10 @@ const products = [
     category: "electronics",
     price: 79.99,
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80",
-    featured: true
+    description: "Premium wireless headphones with active noise cancellation, 30-hour battery life, and crystal-clear sound quality.",
+    rating: 4.5,
+    featured: true,
+    badge: "Best Seller"
   },
   {
     id: 2,
@@ -17,7 +20,10 @@ const products = [
     category: "electronics",
     price: 149.99,
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80",
-    featured: true
+    description: "Advanced smartwatch with heart-rate monitor, GPS, sleep tracking, and a sleek design for everyday use.",
+    rating: 4.7,
+    featured: true,
+    badge: "New"
   },
   {
     id: 3,
@@ -25,6 +31,8 @@ const products = [
     category: "fashion",
     price: 129.00,
     image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&q=80",
+    description: "Classic genuine leather jacket with premium stitching and comfortable fit for a stylish look.",
+    rating: 4.3,
     featured: true
   },
   {
@@ -33,7 +41,10 @@ const products = [
     category: "fashion",
     price: 89.50,
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80",
-    featured: true
+    description: "Lightweight running sneakers with breathable mesh and shock-absorbing soles for maximum comfort.",
+    rating: 4.6,
+    featured: true,
+    badge: "Hot"
   },
   {
     id: 5,
@@ -41,6 +52,8 @@ const products = [
     category: "home",
     price: 39.99,
     image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&q=80",
+    description: "Adjustable LED desk lamp with 3 color modes and USB charging port. Perfect for your workspace.",
+    rating: 4.2,
     featured: false
   },
   {
@@ -49,6 +62,8 @@ const products = [
     category: "home",
     price: 14.99,
     image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=400&q=80",
+    description: "Handcrafted ceramic coffee mug with double-wall insulation to keep drinks warm longer.",
+    rating: 4.8,
     featured: false
   },
   {
@@ -57,7 +72,10 @@ const products = [
     category: "books",
     price: 19.99,
     image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&q=80",
-    featured: false
+    description: "An award-winning novel that captures hearts worldwide with its gripping story and memorable characters.",
+    rating: 4.9,
+    featured: false,
+    badge: "Top Rated"
   },
   {
     id: 8,
@@ -65,6 +83,8 @@ const products = [
     category: "books",
     price: 15.50,
     image: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=400&q=80",
+    description: "Transform your life with practical advice and proven strategies for personal growth and success.",
+    rating: 4.4,
     featured: false
   },
   {
@@ -73,6 +93,8 @@ const products = [
     category: "electronics",
     price: 59.99,
     image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&q=80",
+    description: "Portable Bluetooth speaker with 360° sound, waterproof design, and 12-hour playback time.",
+    rating: 4.5,
     featured: false
   },
   {
@@ -81,6 +103,8 @@ const products = [
     category: "fashion",
     price: 45.00,
     image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&q=80",
+    description: "Timeless sunglasses with UV400 protection and lightweight frame for everyday elegance.",
+    rating: 4.1,
     featured: false
   },
   {
@@ -89,6 +113,8 @@ const products = [
     category: "home",
     price: 24.99,
     image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&q=80",
+    description: "Modern ceramic pot with drainage hole, perfect for small to medium indoor plants.",
+    rating: 4.3,
     featured: false
   },
   {
@@ -97,6 +123,8 @@ const products = [
     category: "books",
     price: 29.99,
     image: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=400&q=80",
+    description: "200+ delicious recipes from around the world with beautiful photography and step-by-step guides.",
+    rating: 4.6,
     featured: false
   }
 ];
