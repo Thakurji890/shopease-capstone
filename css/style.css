@@ -1258,3 +1258,60 @@ textarea:focus-visible {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
+
+/* ========== ABOUT SECTION ========== */
+.about-section {
+  padding: 4rem 0;
+  background: var(--bg-alt);
+}
+
+.about-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stat-item {
+  padding: 1.5rem;
+  background: var(--bg-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-item h3 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.3rem;
+}
+
+.stat-item p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+}
