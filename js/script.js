@@ -439,6 +439,4 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateWishlistCount();
   initScrollReveal();
-  attachWishlistListeners();
-  attachQuickViewListeners();
 });
