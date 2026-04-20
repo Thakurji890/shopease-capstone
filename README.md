@@ -136,5 +136,10 @@ shop ease-capstone/
 ├── about.html           # About page
 └── README.md            # Project documentation
 
+---
+
+### ⭐ If you found this project helpful, please give it a star! ⭐
+
+--- 
 
 More updates coming soon! 🚀
