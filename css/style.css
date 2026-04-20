@@ -1,0 +1,55 @@
+/* ========== CSS RESET ========== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========== CSS VARIABLES ========== */
+:root {
+  --primary-color: #2c7a7b;
+  --secondary-color: #38b2ac;
+  --accent-color: #f6ad55;
+  --bg-color: #ffffff;
+  --text-color: #2d3748;
+  --light-gray: #f7fafc;
+  --dark-gray: #4a5568;
+  --font-family: 'Poppins', sans-serif;
+  --transition: all 0.3s ease-in-out;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ========== BASE STYLES ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ========== CONTAINER ========== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
