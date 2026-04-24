@@ -11,7 +11,7 @@
   function navItem(href, label, page, extra = "", id = "") {
     const isActive = activePage === page ? ' class="active"' : "";
     const idAttr = id ? ` id="${id}"` : "";
-    return `<li><a href="${href}"${isActive}${idAttr}>${label}${extra}</a></li>`;
+    return `<li${idAttr}><a href="${href}"${isActive}>${label}${extra}</a></li>`;
   }
 
   // ── INJECT LOADER + BACK-TO-TOP + HEADER ─────────────────
@@ -31,7 +31,7 @@
             ${navItem("products.html", "Products","products")}
             ${navItem("cart.html",     "Cart",    "cart", ' <span class="cart-count">0</span>')}
             ${navItem("contact.html",  "Contact", "contact")}
-            <li id="authLink">${navItem("login.html", "Login", "login", ' <span id="userStatus">👤</span>')}</li>
+            ${navItem("login.html", "Login", "login", ' <span id="userStatus">👤</span>', 'authLink')}
             <li><button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button></li>
           </ul>
         </nav>
