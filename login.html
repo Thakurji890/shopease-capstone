@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase | Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 40px;
+      background: var(--bg-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .auth-form .form-group {
+      margin-bottom: 20px;
+    }
+    .auth-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    .error-msg {
+      color: #e53e3e;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="container">
+      <div class="auth-container reveal">
+        <div class="auth-header">
+          <h1>Welcome Back</h1>
+          <p>Login to your account to continue shopping.</p>
+        </div>
+        <form class="auth-form" id="loginForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+            <div id="loginError" class="error-msg"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login 🚀</button>
+        </form>
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/components.js" data-page="login"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorEl = document.getElementById('loginError');
+
+      try {
+        const response = await fetch('api/login.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showToast("👋 Welcome back, " + data.user.name + "!");
+          setTimeout(() => {
+            window.location.href = data.user.role === 'admin' ? 'admin/index.php' : 'index.html';
+          }, 1500);
+        } else {
+          errorEl.textContent = data.error || "Login failed";
+        }
+      } catch (error) {
+        errorEl.textContent = "An error occurred. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>

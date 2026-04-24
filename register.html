@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase | Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .auth-container {
+      max-width: 400px;
+      margin: 80px auto;
+      padding: 40px;
+      background: var(--bg-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+    }
+    .auth-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .auth-form .form-group {
+      margin-bottom: 20px;
+    }
+    .auth-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .auth-form input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+    .error-msg {
+      color: #e53e3e;
+      font-size: 0.85rem;
+      margin-top: 5px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <div class="container">
+      <div class="auth-container reveal">
+        <div class="auth-header">
+          <h1>Create Account</h1>
+          <p>Join ShopEase for a better shopping experience.</p>
+        </div>
+        <form class="auth-form" id="registerForm">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="John Doe" required minlength="3">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="email@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required minlength="6">
+            <div id="registerError" class="error-msg"></div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign Up ✨</button>
+        </form>
+        <div class="auth-footer">
+          <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/components.js" data-page="register"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorEl = document.getElementById('registerError');
+
+      try {
+        const response = await fetch('api/register.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showToast("🎉 Account created! Please login.");
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+        } else {
+          errorEl.textContent = data.error || "Registration failed";
+        }
+      } catch (error) {
+        errorEl.textContent = "An error occurred. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>
