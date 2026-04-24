@@ -85,6 +85,14 @@ try {
         echo "\nProducts seeded successfully!";
     }
 
+    // Check if admin exists
+    $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'");
+    if ($stmt->fetchColumn() == 0) {
+        $admin_pass = password_hash('admin123', PASSWORD_DEFAULT);
+        $pdo->exec("INSERT INTO users (name, email, password, role) VALUES ('Admin User', 'admin@shopease.com', '$admin_pass', 'admin')");
+        echo "\nAdmin user created: admin@shopease.com / admin123";
+    }
+
 } catch (PDOException $e) {
     die("Error: " . $e->getMessage());
 }
