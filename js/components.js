@@ -8,15 +8,15 @@
   const activePage = document.currentScript?.dataset.page || "";
 
   // ── NAV ITEM HELPER ───────────────────────────────────────
-  function navItem(href, label, page, extra = "") {
+  function navItem(href, label, page, extra = "", id = "") {
     const isActive = activePage === page ? ' class="active"' : "";
-    return `<li><a href="${href}"${isActive}>${label}${extra}</a></li>`;
+    const idAttr = id ? ` id="${id}"` : "";
+    return `<li><a href="${href}"${isActive}${idAttr}>${label}${extra}</a></li>`;
   }
 
   // ── INJECT LOADER + BACK-TO-TOP + HEADER ─────────────────
   document.body.insertAdjacentHTML("afterbegin", `
     <div class="loader" id="loader"><div class="spinner"></div></div>
-
     <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
     <header class="header">
@@ -26,18 +26,47 @@
         </a>
         <nav class="navbar" aria-label="Main Navigation">
           <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">☰</button>
-          <ul class="nav-links">
+          <ul class="nav-links" id="mainNavLinks">
             ${navItem("index.html",    "Home",    "home")}
             ${navItem("products.html", "Products","products")}
             ${navItem("cart.html",     "Cart",    "cart", ' <span class="cart-count">0</span>')}
             ${navItem("contact.html",  "Contact", "contact")}
-            ${navItem("login.html",    "Login",   "login", ' <span id="userStatus">👤</span>')}
+            <li id="authLink">${navItem("login.html", "Login", "login", ' <span id="userStatus">👤</span>')}</li>
             <li><button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button></li>
           </ul>
         </nav>
       </div>
     </header>
   `);
+
+  // ── DYNAMIC AUTH UPDATES ──────────────────────────────────
+  async function updateNavbarAuth() {
+    try {
+      const response = await fetch('api/check_auth.php');
+      const data = await response.json();
+      const authLink = document.getElementById('authLink');
+      const navLinks = document.getElementById('mainNavLinks');
+
+      if (data.authenticated) {
+        let adminLink = '';
+        if (data.user.role === 'admin') {
+          adminLink = navItem("admin/index.php", "Admin", "admin");
+        }
+        
+        authLink.innerHTML = `
+          <div class="user-dropdown">
+            <span class="user-name">Hi, ${data.user.name.split(' ')[0]}</span>
+            <ul class="dropdown-menu">
+              ${adminLink}
+              <li><a href="api/logout.php">Logout 🚪</a></li>
+            </ul>
+          </div>
+        `;
+      }
+    } catch (e) { console.error("Auth check failed", e); }
+  }
+
+  updateNavbarAuth();
 
   // ── INJECT FOOTER ─────────────────────────────────────────
   document.body.insertAdjacentHTML("beforeend", `

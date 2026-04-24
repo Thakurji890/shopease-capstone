@@ -239,6 +239,64 @@ button {
   color: var(--primary-color);
 }
 
+/* User Dropdown */
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.user-name {
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-color);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.user-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+.dropdown-menu li {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.dropdown-menu a:hover {
+  background: var(--bg-alt);
+  color: var(--primary-color);
+}
+
 /* ========== HERO SECTION ========== */
 .hero {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
