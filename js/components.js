@@ -31,6 +31,7 @@
             ${navItem("products.html", "Products","products")}
             ${navItem("cart.html",     "Cart",    "cart", ' <span class="cart-count">0</span>')}
             ${navItem("contact.html",  "Contact", "contact")}
+            ${navItem("login.html",    "Login",   "login", ' <span id="userStatus">👤</span>')}
             <li><button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button></li>
           </ul>
         </nav>

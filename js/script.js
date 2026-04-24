@@ -138,11 +138,13 @@ function createProductCard(product) {
 ============================================================ */
 const featuredGrid = document.getElementById("featuredProducts");
 
-if (featuredGrid) {
-  const featured = products.filter(p => p.featured);
-  featuredGrid.innerHTML = featured.map(createProductCard).join("");
-  attachAddToCartListeners();
-}
+window.addEventListener('productsLoaded', () => {
+  if (featuredGrid) {
+    const featured = products.filter(p => p.featured == 1 || p.featured === true);
+    featuredGrid.innerHTML = featured.map(createProductCard).join("");
+    attachAddToCartListeners();
+  }
+});
 
 /* ============================================================
    7. PRODUCTS PAGE - Render, Search, Filter, Sort
@@ -194,12 +196,14 @@ function filterAndSort() {
   renderProducts(filtered);
 }
 
-if (productsGrid) {
-  renderProducts(products);
-  searchInput?.addEventListener("input", filterAndSort);
-  categoryFilter?.addEventListener("change", filterAndSort);
-  sortFilter?.addEventListener("change", filterAndSort);
-}
+window.addEventListener('productsLoaded', () => {
+  if (productsGrid) {
+    renderProducts(products);
+    searchInput?.addEventListener("input", filterAndSort);
+    categoryFilter?.addEventListener("change", filterAndSort);
+    sortFilter?.addEventListener("change", filterAndSort);
+  }
+});
 
 /* ============================================================
    8. ATTACH ADD-TO-CART LISTENERS  (defined fully in section 17)
