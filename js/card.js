@@ -35,7 +35,7 @@ function renderCart() {
       <img src="${item.image}" alt="${item.name}" loading="lazy">
       <div class="cart-item-details">
         <h4>${item.name}</h4>
-        <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+        <p class="cart-item-price">$${parseFloat(item.price).toFixed(2)}</p>
         <div class="quantity-controls">
           <button class="qty-decrease" data-id="${item.id}">−</button>
           <span>${item.quantity}</span>
@@ -43,7 +43,7 @@ function renderCart() {
         </div>
       </div>
       <div class="cart-item-right">
-        <p><strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>
+        <p><strong>$${(parseFloat(item.price) * item.quantity).toFixed(2)}</strong></p>
         <button class="remove-btn" data-id="${item.id}">Remove</button>
       </div>
     </div>
@@ -61,9 +61,9 @@ function updateSummary(cart) {
   const shipping = subtotal > 50 ? 0 : (subtotal > 0 ? 5.99 : 0);
   const total = subtotal + shipping;
 
-  subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
-  shippingEl.textContent = shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`;
-  totalEl.textContent = `$${total.toFixed(2)}`;
+  subtotalEl.textContent = `$${parseFloat(subtotal).toFixed(2)}`;
+  shippingEl.textContent = shipping === 0 ? "FREE" : `$${parseFloat(shipping).toFixed(2)}`;
+  totalEl.textContent = `$${parseFloat(total).toFixed(2)}`;
 }
 
 /* ============================================================

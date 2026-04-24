@@ -124,7 +124,7 @@ function createProductCard(product) {
       <div class="product-info">
         <span class="product-category">${product.category}</span>
         <h3 class="product-name">${product.name}</h3>
-        <p class="product-price">$${product.price.toFixed(2)}</p>
+        <p class="product-price">$${parseFloat(product.price).toFixed(2)}</p>
         <button class="btn btn-primary add-to-cart-btn" data-id="${product.id}">
           Add to Cart 🛒
         </button>
@@ -350,7 +350,7 @@ function openProductModal(productId) {
       <span class="product-category">${product.category}</span>
       <h2>${product.name}</h2>
       <div class="rating">${stars} <span style="color: var(--text-light); font-size: 0.9rem;">(${product.rating})</span></div>
-      <p class="price">$${product.price.toFixed(2)}</p>
+      <p class="price">$${parseFloat(product.price).toFixed(2)}</p>
       <p class="description">${product.description}</p>
       <button class="btn btn-primary btn-block add-to-cart-btn" data-id="${product.id}">
         Add to Cart 🛒
