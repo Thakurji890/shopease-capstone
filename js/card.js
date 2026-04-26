@@ -50,7 +50,6 @@ function renderCart() {
   `).join("");
 
   updateSummary(cart);
-  attachCartListeners();
 }
 
 /* ============================================================
@@ -69,17 +68,23 @@ function updateSummary(cart) {
 /* ============================================================
    CART INTERACTIONS
 ============================================================ */
-function attachCartListeners() {
-  document.querySelectorAll(".qty-increase").forEach(btn => {
-    btn.addEventListener("click", () => updateQuantity(+btn.dataset.id, 1));
-  });
+/* ============================================================
+   CART INTERACTIONS (Event Delegation)
+============================================================ */
+function initCartEventListeners() {
+  document.addEventListener("click", e => {
+    const target = e.target;
+    const id = parseInt(target.dataset.id);
 
-  document.querySelectorAll(".qty-decrease").forEach(btn => {
-    btn.addEventListener("click", () => updateQuantity(+btn.dataset.id, -1));
-  });
-
-  document.querySelectorAll(".remove-btn").forEach(btn => {
-    btn.addEventListener("click", () => removeFromCart(+btn.dataset.id));
+    if (target.classList.contains("qty-increase")) {
+      updateQuantity(id, 1);
+    } 
+    else if (target.classList.contains("qty-decrease")) {
+      updateQuantity(id, -1);
+    } 
+    else if (target.classList.contains("remove-btn")) {
+      removeFromCart(id);
+    }
   });
 }
 
@@ -108,7 +113,7 @@ function removeFromCart(id) {
 }
 
 /* ============================================================
-   CHECKOUT MODAL
+   CHECKOUT MODAL & FORM
 ============================================================ */
 if (checkoutBtn) {
   checkoutBtn.addEventListener("click", () => {
@@ -116,44 +121,58 @@ if (checkoutBtn) {
   });
 }
 
-if (modalClose) {
-  modalClose.addEventListener("click", () => {
-    checkoutModal.hidden = true;
-  });
-}
+// Close modal logic
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("modal-close") || e.target === checkoutModal) {
+    if (checkoutModal) checkoutModal.hidden = true;
+  }
+});
 
-// Close modal when clicking outside
-if (checkoutModal) {
-  checkoutModal.addEventListener("click", e => {
-    if (e.target === checkoutModal) {
-      checkoutModal.hidden = true;
+if (checkoutForm) {
+  checkoutForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const cart = getCart();
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const shipping = subtotal > 50 ? 0 : 5.99;
+    const totalAmount = subtotal + shipping;
+
+    try {
+      const response = await fetch('api/place_order.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart, total_amount: totalAmount })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.removeItem("cart");
+        checkoutModal.hidden = true;
+        showToast("🎉 Order placed successfully!");
+        
+        // UI Reset
+        checkoutForm.reset();
+        renderCart();
+        updateCartCount();
+        
+        // Optional: Redirect to a success state or home
+        setTimeout(() => window.location.href = 'index.php', 2000);
+      } else {
+        showToast("❌ " + (data.error || "Checkout failed"));
+        if (response.status === 401) setTimeout(() => window.location.href = 'login.php', 1500);
+      }
+    } catch (error) {
+      showToast("❌ Connection error");
+      console.error(error);
     }
   });
 }
 
-/* ============================================================
-   CHECKOUT FORM SUBMISSION
-============================================================ */
-if (checkoutForm) {
-  checkoutForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const name = document.getElementById("fullName").value.trim();
-
-    // Clear cart
-    localStorage.removeItem("cart");
-    checkoutModal.hidden = true;
-
-    // Show success
-    alert(`🎉 Thank you, ${name}! Your order has been placed successfully.`);
-
-    // Reset
-    checkoutForm.reset();
-    renderCart();
-    updateCartCount();
-  });
-}
 
 /* ============================================================
    INITIALIZE
 ============================================================ */
-document.addEventListener("DOMContentLoaded", renderCart);
+document.addEventListener("DOMContentLoaded", () => {
+  renderCart();
+  initCartEventListeners();
+});
