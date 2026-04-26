@@ -1,13 +1,7 @@
 <?php
 // api/get_orders.php
 require_once 'config.php';
-session_start();
-
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
-    http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
-    exit;
-}
+require_admin();
 
 try {
     $stmt = $pdo->query("SELECT o.*, u.email FROM orders o JOIN users u ON o.user_id = u.id ORDER BY o.created_at DESC");

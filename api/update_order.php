@@ -1,13 +1,7 @@
 <?php
 // api/update_order.php
 require_once 'config.php';
-session_start();
-
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
-    http_response_code(403);
-    echo json_encode(["error" => "Unauthorized"]);
-    exit;
-}
+require_admin();
 
 $data = json_decode(file_get_contents("php://input"), true);
 

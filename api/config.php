@@ -19,4 +19,18 @@ header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+/**
+ * Helper to require admin privileges for API endpoints
+ */
+function require_admin() {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
+        http_response_code(403);
+        echo json_encode(["error" => "Unauthorized"]);
+        exit;
+    }
+}
 ?>
