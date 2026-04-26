@@ -1,32 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="ShopEase - Your one-stop shop for amazing products online.">
-  <meta name="keywords" content="ecommerce, shop, online store, shopease">
-  <meta name="author" content="Manesh Thakur">
-  <meta property="og:title" content="ShopEase - Shop Smart, Shop Easy">
-  <meta property="og:description" content="Discover amazing products at unbeatable prices.">
-  <meta property="og:type" content="website">
-  <title>ShopEase | Home</title>
-  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+<?php
+$pageTitle = 'Home';
+$currentPage = 'home';
+include 'includes/header.php';
+?>
 
-
-  <!-- ================= MAIN CONTENT ================= -->
-  <main>
-
+<main>
     <!-- Hero Section -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-content">
         <h1 id="hero-title">Shop Smart. <span>Shop Easy.</span></h1>
         <p>Discover amazing products at unbeatable prices. Your perfect shopping experience starts here!</p>
-        <a href="products.html" class="btn btn-primary">Shop Now →</a>
+        <a href="products.php" class="btn btn-primary">Shop Now →</a>
       </div>
     </section>
 
@@ -87,7 +71,7 @@
           <!-- Products injected via JavaScript -->
         </div>
         <div class="text-center">
-          <a href="products.html" class="btn btn-outline">View All Products</a>
+          <a href="products.php" class="btn btn-outline">View All Products</a>
         </div>
       </div>
     </section>
@@ -103,19 +87,6 @@
         </form>
       </div>
     </section>
+</main>
 
-  </main>
-
-  <!-- Product Detail Modal -->
-  <div class="modal product-modal" id="productModal" hidden>
-    <div class="modal-content product-modal-content">
-      <button class="modal-close" aria-label="Close modal">✕</button>
-      <div class="product-modal-body" id="productModalBody"></div>
-    </div>
-  </div>
-
-  <script src="js/components.js" data-page="home"></script>
-  <script src="js/products.js"></script>
-  <script src="js/script.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

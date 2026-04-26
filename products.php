@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Browse all products at ShopEase - Amazing deals waiting for you!">
-  <title>ShopEase | Products</title>
-  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+<?php
+$pageTitle = 'Products';
+$currentPage = 'products';
+include 'includes/header.php';
+?>
 
-  <main>
-
+<main>
     <section class="page-header">
       <div class="container">
         <h1>🛍️ All Products</h1>
@@ -58,19 +49,6 @@
         <p id="noResults" class="no-results" hidden>😔 No products found. Try different keywords.</p>
       </div>
     </section>
+</main>
 
-  </main>
-
-  <!-- Product Detail Modal -->
-  <div class="modal product-modal" id="productModal" hidden>
-    <div class="modal-content product-modal-content">
-      <button class="modal-close" aria-label="Close modal">✕</button>
-      <div class="product-modal-body" id="productModalBody"></div>
-    </div>
-  </div>
-
-  <script src="js/components.js" data-page="products"></script>
-  <script src="js/products.js"></script>
-  <script src="js/script.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>

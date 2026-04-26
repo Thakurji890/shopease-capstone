@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopEase | Register</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
+<?php
+$pageTitle = 'Register';
+$currentPage = 'register';
+include 'includes/header.php';
+?>
+
+<style>
     .auth-container {
       max-width: 400px;
       margin: 80px auto;
@@ -48,11 +45,9 @@
       margin-top: 5px;
       height: 20px;
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <main>
+<main>
     <div class="container">
       <div class="auth-container reveal">
         <div class="auth-header">
@@ -76,15 +71,13 @@
           <button type="submit" class="btn btn-primary btn-block">Sign Up ✨</button>
         </form>
         <div class="auth-footer">
-          <p>Already have an account? <a href="login.html">Login here</a></p>
+          <p>Already have an account? <a href="login.php">Login here</a></p>
         </div>
       </div>
     </div>
-  </main>
+</main>
 
-  <script src="js/components.js" data-page="register"></script>
-  <script src="js/script.js"></script>
-  <script>
+<script>
     document.getElementById('registerForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('name').value;
@@ -104,7 +97,7 @@
         if (response.ok) {
           showToast("🎉 Account created! Please login.");
           setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
           }, 2000);
         } else {
           errorEl.textContent = data.error || "Registration failed";
@@ -113,6 +106,6 @@
         errorEl.textContent = "An error occurred. Please try again.";
       }
     });
-  </script>
-</body>
-</html>
+</script>
+
+<?php include 'includes/footer.php'; ?>

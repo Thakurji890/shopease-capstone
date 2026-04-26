@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ShopEase | Login</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
+<?php
+$pageTitle = 'Login';
+$currentPage = 'login';
+include 'includes/header.php';
+?>
+
+<style>
     .auth-container {
       max-width: 400px;
       margin: 100px auto;
@@ -48,11 +45,9 @@
       margin-top: 5px;
       height: 20px;
     }
-  </style>
-</head>
-<body>
+</style>
 
-  <main>
+<main>
     <div class="container">
       <div class="auth-container reveal">
         <div class="auth-header">
@@ -72,15 +67,13 @@
           <button type="submit" class="btn btn-primary btn-block">Login 🚀</button>
         </form>
         <div class="auth-footer">
-          <p>Don't have an account? <a href="register.html">Register here</a></p>
+          <p>Don't have an account? <a href="register.php">Register here</a></p>
         </div>
       </div>
     </div>
-  </main>
+</main>
 
-  <script src="js/components.js" data-page="login"></script>
-  <script src="js/script.js"></script>
-  <script>
+<script>
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('email').value;
@@ -99,7 +92,7 @@
         if (response.ok) {
           showToast("👋 Welcome back, " + data.user.name + "!");
           setTimeout(() => {
-            window.location.href = data.user.role === 'admin' ? 'admin/index.php' : 'index.html';
+            window.location.href = data.user.role === 'admin' ? 'admin/index.php' : 'index.php';
           }, 1500);
         } else {
           errorEl.textContent = data.error || "Login failed";
@@ -108,6 +101,6 @@
         errorEl.textContent = "An error occurred. Please try again.";
       }
     });
-  </script>
-</body>
-</html>
+</script>
+
+<?php include 'includes/footer.php'; ?>

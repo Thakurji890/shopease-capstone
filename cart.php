@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Your ShopEase shopping cart">
-  <title>ShopEase | Cart</title>
-  <link rel="icon" href="assets/icons/favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+<?php
+$pageTitle = 'Cart';
+$currentPage = 'cart';
+$extraScripts = ['card'];
+include 'includes/header.php';
+?>
 
-  <main>
-
+<main>
     <section class="page-header">
       <div class="container">
         <h1>🛒 Your Shopping Cart</h1>
@@ -39,14 +31,14 @@
               <span>Total:</span><span id="total">$0.00</span>
             </div>
             <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
-            <a href="products.html" class="btn btn-outline btn-block">Continue Shopping</a>
+            <a href="products.php" class="btn btn-outline btn-block">Continue Shopping</a>
           </aside>
         </div>
 
         <div class="empty-cart" id="emptyCart" hidden>
           <h2>🛒 Your cart is empty</h2>
           <p>Looks like you haven't added anything yet.</p>
-          <a href="products.html" class="btn btn-primary">Start Shopping</a>
+          <a href="products.php" class="btn btn-primary">Start Shopping</a>
         </div>
 
       </div>
@@ -74,12 +66,6 @@
         </form>
       </div>
     </div>
+</main>
 
-  </main>
-
-  <script src="js/components.js" data-page="cart"></script>
-  <script src="js/products.js"></script>
-  <script src="js/card.js"></script>
-  <script src="js/script.js"></script>
-</body>
-</html>
+<?php include 'includes/footer.php'; ?>
