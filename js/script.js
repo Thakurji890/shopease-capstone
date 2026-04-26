@@ -142,7 +142,6 @@ window.addEventListener('productsLoaded', () => {
   if (featuredGrid) {
     const featured = products.filter(p => p.featured == 1 || p.featured === true);
     featuredGrid.innerHTML = featured.map(createProductCard).join("");
-    attachAddToCartListeners();
   }
 });
 
@@ -166,7 +165,6 @@ function renderProducts(list) {
 
   noResults.hidden = true;
   productsGrid.innerHTML = list.map(createProductCard).join("");
-  attachAddToCartListeners();
 }
 
 function filterAndSort() {
@@ -318,19 +316,7 @@ function updateWishlistCount() {
   });
 }
 
-// Attach wishlist listeners (called after rendering products)
-function attachWishlistListeners() {
-  document.querySelectorAll(".wishlist-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const id = parseInt(btn.dataset.id);
-      toggleWishlist(id);
-      btn.textContent = isInWishlist(id) ? "❤️" : "🤍";
-      btn.classList.add("pulse");
-      setTimeout(() => btn.classList.remove("pulse"), 400);
-    });
-  });
-}
+// Wishlist listeners are now handled via delegation in initEventListeners()
 
 /* ============================================================
    15. PRODUCT QUICK VIEW MODAL
@@ -367,15 +353,7 @@ function openProductModal(productId) {
   });
 }
 
-function attachQuickViewListeners() {
-  document.querySelectorAll(".quick-view-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const id = parseInt(btn.dataset.id);
-      openProductModal(id);
-    });
-  });
-}
+// Quick view listeners are now handled via delegation in initEventListeners()
 
 // Close product modal
 if (productModal) {
@@ -417,23 +395,38 @@ function initScrollReveal() {
 }
 
 /* ============================================================
-   17. UPDATE attachAddToCartListeners to include new features
+   17. GLOBAL EVENT DELEGATION
 ============================================================ */
-// Override the original function
-function attachAddToCartListeners() {
-  document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      const id = parseInt(e.target.dataset.id);
+function initEventListeners() {
+  document.addEventListener("click", e => {
+    const target = e.target;
+    
+    // Add to Cart
+    if (target.closest(".add-to-cart-btn")) {
+      const btn = target.closest(".add-to-cart-btn");
+      const id = parseInt(btn.dataset.id);
       addToCart(id);
-      e.target.classList.add("pulse");
-      setTimeout(() => e.target.classList.remove("pulse"), 400);
-    });
+      btn.classList.add("pulse");
+      setTimeout(() => btn.classList.remove("pulse"), 400);
+    }
+    
+    // Wishlist Toggle
+    else if (target.closest(".wishlist-btn")) {
+      const btn = target.closest(".wishlist-btn");
+      const id = parseInt(btn.dataset.id);
+      toggleWishlist(id);
+      btn.textContent = isInWishlist(id) ? "❤️" : "🤍";
+      btn.classList.add("pulse");
+      setTimeout(() => btn.classList.remove("pulse"), 400);
+    }
+    
+    // Quick View
+    else if (target.closest(".quick-view-btn")) {
+      const btn = target.closest(".quick-view-btn");
+      const id = parseInt(btn.dataset.id);
+      openProductModal(id);
+    }
   });
-
-  // Also attach wishlist and quick view
-  attachWishlistListeners();
-  attachQuickViewListeners();
 }
 
 /* ============================================================
@@ -443,4 +436,5 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
   updateWishlistCount();
   initScrollReveal();
+  initEventListeners();
 });

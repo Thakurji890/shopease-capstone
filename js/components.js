@@ -21,17 +21,17 @@
 
     <header class="header">
       <div class="container nav-container">
-        <a href="index.html" class="logo" aria-label="ShopEase Home">
+        <a href="index.php" class="logo" aria-label="ShopEase Home">
           🛒 <span>ShopEase</span>
         </a>
         <nav class="navbar" aria-label="Main Navigation">
           <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">☰</button>
           <ul class="nav-links" id="mainNavLinks">
-            ${navItem("index.html",    "Home",    "home")}
-            ${navItem("products.html", "Products","products")}
-            ${navItem("cart.html",     "Cart",    "cart", ' <span class="cart-count">0</span>')}
-            ${navItem("contact.html",  "Contact", "contact")}
-            ${navItem("login.html", "Login", "login", ' <span id="userStatus">👤</span>', 'authLink')}
+            ${navItem("index.php",    "Home",    "home")}
+            ${navItem("products.php", "Products","products")}
+            ${navItem("cart.php",     "Cart",    "cart", ' <span class="cart-count">0</span>')}
+            ${navItem("contact.php",  "Contact", "contact")}
+            ${navItem("login.php", "Login", "login", ' <span id="userStatus">👤</span>', 'authLink')}
             <li><button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button></li>
           </ul>
         </nav>
@@ -79,10 +79,10 @@
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="products.php">Products</a></li>
+            <li><a href="cart.php">Cart</a></li>
+            <li><a href="contact.php">Contact</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -99,5 +99,13 @@
         <p>© 2026 ShopEase by Manesh Thakur. All rights reserved. Built with 💚 during ApexPlanet Internship.</p>
       </div>
     </footer>
+    
+    <!-- Product Detail Modal -->
+    <div class="modal product-modal" id="productModal" hidden>
+      <div class="modal-content product-modal-content">
+        <button class="modal-close" aria-label="Close modal">✕</button>
+        <div class="product-modal-body" id="productModalBody"></div>
+      </div>
+    </div>
   `);
 })();
