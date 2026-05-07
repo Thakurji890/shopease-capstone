@@ -265,14 +265,20 @@ if (newsletterForm) {
 /* ============================================================
    12. LOADING SPINNER
 ============================================================ */
-window.addEventListener("load", () => {
+function hideLoader() {
   const loader = document.getElementById("loader");
-  if (loader) {
+  if (loader && !loader.classList.contains("hidden")) {
     setTimeout(() => {
-      loader.classList.add("hidden");
+      loader.style.display = "none";
+      loader.classList.add("hidden"); // Kept for consistency
     }, 600);
   }
-});
+}
+
+// Fallback if readyState is already complete
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  hideLoader();
+}
 
 /* ============================================================
    13. BACK TO TOP BUTTON
@@ -433,6 +439,7 @@ function initEventListeners() {
    18. INITIALIZE ALL FEATURES (single DOMContentLoaded)
 ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
+  hideLoader();
   updateCartCount();
   updateWishlistCount();
   initScrollReveal();
